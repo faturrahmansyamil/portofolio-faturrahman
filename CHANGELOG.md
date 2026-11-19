@@ -14,6 +14,8 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 - `.gitignore`.
 
 ### Diubah
+- Data profil asli: nama Faturrahman Syamil, panggilan Fatur, inisial FRS, status "Menerima jasa bikin website", judul hero "Hello, Saya Fatur. / Kenalan Yuk...".
+- Peran yang kosong otomatis disembunyikan dari label hero.
 - Segel hero diputar sebagai elemen `<svg>` utuh, bayangannya jadi lapisan terpisah (tanpa `drop-shadow` pada elemen bergerak).
 - Titik online dan titik linimasa beranimasi lewat `transform`/`opacity`, bukan `box-shadow`.
 - Transisi hover hanya `transform`.

@@ -44,6 +44,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .kicker::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue-light); flex: none; }
 .kicker.on-dark { color: var(--on-dark-2); }
+.kicker.no-dot::before { display: none; }
 .status-online { display: inline-flex; align-items: center; gap: 7px; }
 .status-online i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--online); }
 .status-online i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--online); animation: ping 2s ease-out infinite; }

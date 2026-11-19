@@ -36,6 +36,8 @@
     var k = el.getAttribute("data-bind");
     if (D[k] != null) el.textContent = D[k];
   });
+  // peran kosong → sembunyikan dari kicker hero
+  if (!D.role) $$('[data-bind="role"]').forEach(function (el) { el.hidden = true; el.parentNode.classList.add("no-dot"); });
   document.title = (D.name || "Portofolio") + " · Portofolio";
   $("#year").textContent = new Date().getFullYear();
 

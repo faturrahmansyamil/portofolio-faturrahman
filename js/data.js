@@ -5,13 +5,13 @@
    ========================================================= */
 window.PORTFOLIO = {
   // ---------- Profil ----------
-  name: "Nama Kamu",              // GANTI: nama lengkap
-  shortName: "Nama",              // GANTI: nama panggilan (logo di nav)
-  initials: "NK",                 // GANTI: 2 huruf inisial
-  role: "Web Developer",          // GANTI
-  availability: "Terbuka untuk proyek",
-  heroLine1: "Halo, saya Nama.",  // GANTI: baris 1 judul hero (warna tinta)
-  heroLine2: "Saya bikin web yang hidup", // baris 2 (warna biru, titik otomatis)
+  name: "Faturrahman Syamil",
+  shortName: "Fatur",
+  initials: "FRS",
+  role: "",                       // GANTI: peran/profesi (kosong = disembunyikan)
+  availability: "Menerima jasa bikin website",
+  heroLine1: "Hello, Saya Fatur.",
+  heroLine2: "Kenalan Yuk..",     // baris 2 (biru); titik terakhir ditambah otomatis
   tagline: "Saya membangun website yang cepat, rapi, dan enak dipakai, dari desain sampai online.",
   photo: "",                      // GANTI: "assets/foto.jpg" (persegi). Kosong = tampil inisial
   cv: "",                         // GANTI: "assets/cv.pdf"
