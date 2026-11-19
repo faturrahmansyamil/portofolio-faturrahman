@@ -13,7 +13,7 @@ window.PORTFOLIO = {
   heroLine1: "Hello, Saya Fatur.",
   heroLine2: "Kenalan Yuk..",     // baris 2 (biru); titik terakhir ditambah otomatis
   tagline: "Saya membangun website yang cepat, rapi, dan enak dipakai, dari desain sampai online.",
-  photo: "",                      // GANTI: "assets/foto.jpg" (persegi). Kosong = tampil inisial
+  photo: "assets/foto.webp",      // foto persegi 800x800. Kosong = tampil inisial
   cv: "",                         // GANTI: "assets/cv.pdf"
   email: "emailkamu@domain.com",  // GANTI
 
