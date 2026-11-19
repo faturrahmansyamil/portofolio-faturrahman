@@ -45,8 +45,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .kicker::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue-light); flex: none; }
 .kicker.on-dark { color: var(--on-dark-2); }
 .status-online { display: inline-flex; align-items: center; gap: 7px; }
-.status-online i { width: 8px; height: 8px; border-radius: 50%; background: var(--online); box-shadow: 0 0 0 0 rgba(47,191,99,.5); animation: ping 2s infinite; }
-@keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(47,191,99,0); } 100% { box-shadow: 0 0 0 0 rgba(47,191,99,0); } }
+.status-online i { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--online); }
+.status-online i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--online); animation: ping 2s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: .6; } 80%, 100% { transform: scale(3); opacity: 0; } }
 
 /* ---------- Tombol stiker ---------- */
 .btn {
@@ -213,10 +214,13 @@ body.menu-open .nav-in::before { opacity: 0; }
 
 .hero-media { position: relative; width: min(100%, 460px); justify-self: center; aspect-ratio: 1; }
 .seal-photo { position: absolute; inset: 8%; border: 0; padding: 0; background: none; cursor: pointer; border-radius: 50%; }
-.seal-bg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--blue); overflow: visible; filter: drop-shadow(0 8px 0 var(--edge-shadow)); }
-.seal-bg .seal-path { stroke: var(--edge); stroke-width: .8; transform-origin: 50% 50%; animation: spin 40s linear infinite; }
-.seal-ring { position: absolute; inset: -7%; width: 114%; height: 114%; max-width: none; color: transparent; }
-.seal-ring .seal-path { fill: none; stroke: var(--blue-light); stroke-width: .7; stroke-dasharray: 2 2.4; animation: spin 60s linear infinite reverse; transform-origin: 50% 50%; }
+/* Segel & bayangannya diputar sebagai elemen <svg> utuh (komposit GPU), bukan path di dalamnya */
+.seal-bg, .seal-shadow { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 40s linear infinite; }
+.seal-shadow { inset: 8px 0 -8px; color: var(--edge-shadow); }
+.seal-bg { color: var(--blue); }
+.seal-bg .seal-path { stroke: var(--edge); stroke-width: .8; }
+.seal-ring { position: absolute; inset: -7%; width: 114%; height: 114%; max-width: none; color: transparent; animation: spin 60s linear infinite reverse; }
+.seal-ring .seal-path { fill: none; stroke: var(--blue-light); stroke-width: .7; stroke-dasharray: 2 2.4; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .photo {
   position: absolute; inset: 13%; border-radius: 50%; overflow: hidden;
@@ -321,7 +325,7 @@ body.menu-open .nav-in::before { opacity: 0; }
 .filters button {
   padding: 8px 16px; border-radius: 999px; cursor: pointer;
   background: var(--card); border: var(--bw) solid var(--edge); color: var(--ink);
-  font-weight: 700; font-size: 14px; transition: background .2s, color .2s, transform .25s var(--spring);
+  font-weight: 700; font-size: 14px; transition: transform .25s var(--spring);
 }
 .filters button:hover { transform: translateY(-2px); }
 .filters button[aria-selected="true"] { background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); }
@@ -350,7 +354,7 @@ body.menu-open .nav-in::before { opacity: 0; }
 .exp-grid { display: grid; gap: 40px; }
 @media (min-width: 840px) { .exp-grid { grid-template-columns: .8fr 1.2fr; } .exp-head { position: sticky; top: 120px; align-self: start; } }
 .timeline { position: relative; display: grid; gap: 22px; }
-.timeline li { position: relative; padding-left: 44px; }
+.timeline li { position: relative; padding-left: 44px; isolation: isolate; }
 .timeline li::before {
   content: ""; position: absolute; left: 11px; top: 28px; bottom: -28px; width: 2px;
   background: var(--blue);
@@ -361,8 +365,9 @@ body.menu-open .nav-in::before { opacity: 0; }
   position: absolute; left: 0; top: 18px; width: 24px; height: 24px; border-radius: 50%;
   background: var(--blue); border: var(--bw) solid var(--edge);
 }
-.timeline li.now .pt { background: var(--blue-light); box-shadow: 0 0 0 6px color-mix(in srgb, var(--blue-light) 30%, transparent); animation: glow 2.4s ease-in-out infinite; }
-@keyframes glow { 50% { box-shadow: 0 0 0 11px color-mix(in srgb, var(--blue-light) 10%, transparent); } }
+.timeline li.now .pt { background: var(--blue-light); }
+.timeline li.now .pt::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; background: var(--blue-light); opacity: .3; z-index: -1; animation: glow 2.4s ease-in-out infinite; }
+@keyframes glow { 50% { transform: scale(1.35); opacity: .1; } }
 .timeline .card { padding: 22px 24px; }
 .timeline .when { font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-blue); }
 .timeline h3 { font-size: 26px; margin: 6px 0 2px; }
@@ -381,14 +386,13 @@ body.menu-open .nav-in::before { opacity: 0; }
   font-family: var(--f-head); font-weight: 800; letter-spacing: -.03em;
   font-size: clamp(30px, 6.4vw, 88px); line-height: 1.05; overflow-wrap: anywhere;
   border-bottom: 4px solid rgba(255,255,255,.35);
-  transition: border-color .3s;
 }
 .big-mail:hover { border-color: #fff; }
 .contact-actions { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
 .socials { display: flex; flex-wrap: wrap; gap: 10px; }
 .socials a {
   width: 50px; height: 50px; display: grid; place-items: center; border-radius: 16px;
-  border: 1.5px solid rgba(255,255,255,.55); color: #fff; transition: background .2s, color .2s, transform .25s var(--spring);
+  border: 1.5px solid rgba(255,255,255,.55); color: #fff; transition: transform .25s var(--spring);
 }
 .socials a:hover { background: #fff; color: var(--blue); transform: translateY(-3px); }
 
@@ -433,6 +437,9 @@ body.menu-open .nav-in::before { opacity: 0; }
 .js .project, .js .skill, .js .timeline li, .js .fact { opacity: 0; transform: translateY(36px) rotate(var(--rot, 0deg)); transition: opacity .7s var(--ease), transform .8s var(--spring); }
 .js .project.in, .js .skill.in, .js .timeline li.in, .js .fact.in { opacity: 1; transform: none; }
 .js .project.in:hover, .js .skill.in:hover, .js .fact.in:hover { transform: translateY(-5px); }
+
+/* ---------- Jeda animasi tanpa henti saat di luar layar ---------- */
+.idle, .idle * { animation-play-state: paused !important; }
 
 /* ---------- Kurangi gerakan ---------- */
 @media (prefers-reduced-motion: reduce) {

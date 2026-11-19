@@ -26,7 +26,9 @@ Dibangun tanpa framework, cukup HTML, CSS, dan JavaScript.
 ├── .well-known/security.txt
 ├── DESIGN.md             sistem desain
 ├── SECURITY.md           kebijakan keamanan
-├── SKILL.md              panduan untuk AI agent / kontributor
+├── AGENTS.md             aturan wajib untuk AI agent & developer
+├── CLAUDE.md             penunjuk aturan untuk Claude
+├── SKILL.md              resep tugas umum
 ├── PLANNING.md           rencana & langkah pembuatan
 └── CHANGELOG.md          riwayat perubahan
 ```

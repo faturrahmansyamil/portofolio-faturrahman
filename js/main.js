@@ -271,6 +271,14 @@
     if (e.target.classList && e.target.classList.contains("in") && e.propertyName === "opacity") e.target.style.transitionDelay = "";
   });
 
+  /* ---------- Jeda animasi tanpa henti di luar layar ---------- */
+  if ("IntersectionObserver" in window) {
+    var po = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle("idle", !en.isIntersecting); });
+    });
+    $$("[data-pause]").forEach(function (el) { po.observe(el); });
+  }
+
   /* ---------- Nav: kapsul + sembunyi saat turun ---------- */
   var nav = $("#nav"), lastY = window.scrollY, ticking = false;
   function onScroll() {
@@ -346,7 +354,7 @@
 
     /* Magnet */
     $$("[data-magnetic]").forEach(function (el) {
-      el.style.transition = "transform .4s cubic-bezier(.34,1.56,.64,1), border-color .3s";
+      el.style.transition = "transform .4s cubic-bezier(.34,1.56,.64,1)";
       el.addEventListener("mousemove", function (e) {
         var r = el.getBoundingClientRect();
         var x = (e.clientX - r.left - r.width / 2) * 0.18, y = (e.clientY - r.top - r.height / 2) * 0.3;
