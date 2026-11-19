@@ -1,0 +1,16 @@
+# Rahasia - jangan pernah di-commit
+.env
+.env.*
+*.pem
+*.key
+
+# Sistem & editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Lain-lain
+node_modules/
+*.log

@@ -117,8 +117,8 @@
       ? '<img src="' + esc(p.image) + '" alt="Tampilan ' + esc(p.title) + '" width="1600" height="848" loading="lazy">'
       : illus(i) + '<span class="cover-note">Ilustrasi</span>';
     var links = "";
-    if (p.demo) links += '<a href="' + esc(p.demo) + '" target="_blank" rel="noopener" data-cursor-label="buka">' + icon("link") + 'Demo</a>';
-    if (p.code) links += '<a href="' + esc(p.code) + '" target="_blank" rel="noopener" data-cursor-label="intip kode">' + icon("github") + 'Kode</a>';
+    if (p.demo) links += '<a href="' + esc(p.demo) + '" target="_blank" rel="noopener noreferrer" data-cursor-label="buka">' + icon("link") + 'Demo</a>';
+    if (p.code) links += '<a href="' + esc(p.code) + '" target="_blank" rel="noopener noreferrer" data-cursor-label="intip kode">' + icon("github") + 'Kode</a>';
     return '<article class="card project" data-cat="' + esc(p.category) + '">' +
       '<div class="cover">' + cover + '</div>' +
       '<div class="body"><div class="meta"><span class="chip ' + esc(p.status) + '">' + esc(STATUS[p.status] || p.status) + '</span><span class="year">' + esc(p.category) + ' · ' + esc(p.year) + '</span></div>' +
@@ -161,7 +161,7 @@
 
   /* ---------- Sosmed ---------- */
   $("#socials").innerHTML = (D.socials || []).filter(function (s) { return s.url; }).map(function (s) {
-    return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener" aria-label="' + esc(s.label) + '" data-cursor-label="' + esc(s.label) + '">' + icon(s.icon) + '</a></li>';
+    return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(s.label) + '" data-cursor-label="' + esc(s.label) + '">' + icon(s.icon) + '</a></li>';
   }).join("");
 
   /* ---------- Toast ---------- */

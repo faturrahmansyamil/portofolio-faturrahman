@@ -1,0 +1,5 @@
+Contact: https://github.com/faturrahmansyamil/portofolio-faturrahman/security/advisories/new
+Expires: 2027-11-19T00:00:00.000Z
+Preferred-Languages: id, en
+Canonical: https://faturrahmansyamil.github.io/portofolio-faturrahman/.well-known/security.txt
+Policy: https://github.com/faturrahmansyamil/portofolio-faturrahman/blob/main/SECURITY.md

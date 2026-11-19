@@ -10,10 +10,12 @@
   <meta property="og:description" content="Web developer yang membangun web cepat, rapi, dan enak dipakai.">
   <meta name="theme-color" content="#0D6CD7">
 
+  <!-- Keamanan: lihat SECURITY.md. Kalau skrip tema di bawah diubah, hitung ulang hash-nya (SKILL.md). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-oe7akUwJTyxIIkrih4OMReWirgC7A766gzreq8XImhU='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
   <!-- Tema disetel sebelum render supaya tidak berkedip -->
-  <script>
-    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
-  </script>
+  <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
