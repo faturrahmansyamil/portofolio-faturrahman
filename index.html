@@ -58,6 +58,7 @@
     <div class="cursor-dot"></div>
     <div class="cursor-label"></div>
   </div>
+  <div class="progress" id="progress" aria-hidden="true"><span></span></div>
 
   <!-- ================= NAV ================= -->
   <header class="nav" id="nav">
@@ -176,6 +177,14 @@
       </div>
     </section>
 
+    <!-- Pita berjalan (hiasan) -->
+    <div class="ribbons" aria-hidden="true" data-pause>
+      <div class="ribbon back"><div class="track" id="ribbonBack"></div></div>
+      <div class="ribbon front"><div class="track" id="ribbonFront"></div></div>
+    </div>
+
+    <svg class="wave wave-to-surface" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 0 480 80 720 40 S 1200 0 1440 40 V80 H0Z"/></svg>
+
     <!-- ================= 05 PENGALAMAN ================= -->
     <section class="section surface" id="pengalaman" data-pause>
       <div class="wrap exp-grid">
@@ -197,7 +206,7 @@
         <p class="kicker on-dark" data-reveal>05 · Kontak</p>
         <h2 class="h2 contact-title" data-split>Punya ide? Yuk bikin bareng<span class="dot">.</span></h2>
         <a class="big-mail" id="bigMail" href="#" data-magnetic data-cursor-label="kirim email"><span data-bind="email">email@domain.com</span></a>
-        <div class="contact-actions">
+        <div class="contact-actions" data-reveal>
           <button class="btn btn-white" id="copyBtn" data-cursor-label="salin">Salin email <svg class="ic"><use href="#i-copy"/></svg></button>
           <ul class="socials" id="socials"></ul>
         </div>

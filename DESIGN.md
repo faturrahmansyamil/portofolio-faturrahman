@@ -92,6 +92,12 @@ Sprite di `index.html`: garis 2px, ujung bulat, kisi 24×24, tanpa isi. Titik bi
 - `data-magnetic`: efek magnet pada email besar.
 - Menu HP: lingkaran biru membesar dari tombol menu.
 - Di layar sentuh: kursor khusus dan magnet dimatikan.
+- **Pembuka hero**: teks muncul berurutan (kicker → judul → kalimat → tombol → angka); segel berputar masuk dengan pegas, lalu chip dan gelembung meletup satu-satu (properti `scale`, terpisah dari `transform` animasi `bob`).
+- **Parallax hero**: `main.js` mengisi `--py` (posisi scroll) di `#top`; glow dan foto digeser lewat properti `translate`. Foto juga ikut arah mouse (maks ±13px).
+- **Bar progres**: garis biru muda 4px di atas layar, `scaleX` sesuai posisi scroll. Tinggi halaman diukur saat resize, bukan saat scroll.
+- **Pita berjalan** (`.ribbons`): dua pita bersilang setelah Proyek, depan biru berisi `stack`, belakang berisi status. Berhenti saat disentuh mouse, dijeda di luar layar.
+- **Detail kartu**: ikon meletup sesudah kartunya muncul, tag muncul bertahap (`--i`), ikon bergoyang saat hover. Garis linimasa tergambar dari atas, titiknya meletup. Sosmed muncul satu-satu.
+- **Hover kecil**: panah tombol bergeser ke arah panahnya; ikon tema berputar saat diganti.
 
 ## Batas
 

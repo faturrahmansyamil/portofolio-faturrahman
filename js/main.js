@@ -17,6 +17,10 @@
     });
   }
   function icon(id) { return '<svg class="ic" aria-hidden="true"><use href="#i-' + id + '"/></svg>'; }
+  // tag teknologi dengan urutan (--i) untuk animasi muncul bertahap
+  function tags(list) {
+    return (list || []).map(function (t, i) { return '<span class="tag" style="--i:' + i + '">' + esc(t) + '</span>'; }).join("");
+  }
 
   /* ---------- Segel: lingkaran dengan 12 lekukan ---------- */
   function sealPath(cx, cy, r, amp, n) {
@@ -69,9 +73,20 @@
   $("#skills").innerHTML = (D.skills || []).map(function (s, i) {
     return '<article class="card skill"><span class="ikon-stiker' + (i === 0 ? " blue" : "") + '">' + icon(s.icon) + '</span>' +
       '<h3>' + esc(s.title) + '</h3><p>' + esc(s.text) + '</p>' +
-      '<div class="tags">' + (s.tags || []).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</div></article>';
+      '<div class="tags">' + tags(s.tags) + '</div></article>';
   }).join("");
-  $("#stack").innerHTML = '<span class="label">Alat harian:</span>' + (D.stack || []).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("");
+  $("#stack").innerHTML = '<span class="label">Alat harian:</span>' + tags(D.stack);
+
+  /* ---------- Pita berjalan ---------- */
+  function ribbon(sel, words) {
+    var el = $(sel); if (!el || !words.length) return;
+    var sep = '<svg viewBox="0 0 100 100" aria-hidden="true"><path class="seal-path" d="' + SEAL + '"/></svg>';
+    var one = words.map(function (w) { return "<span>" + esc(w) + "</span>" + sep; }).join("");
+    var grp = '<div class="grp">' + one + one + one + "</div>"; // diulang supaya selalu lebih lebar dari layar (≥ 2560px)
+    el.innerHTML = grp + grp; // dua kelompok identik → geser -50% berulang mulus
+  }
+  ribbon("#ribbonFront", D.stack || []);
+  ribbon("#ribbonBack", [D.availability, "Cepat", "Rapi", "Enak dipakai", "Dari desain sampai online"].filter(Boolean));
 
   /* ---------- Proyek ---------- */
   var STATUS = { go: "Live", beta: "Beta", wip: "Dikembangkan", plan: "Direncanakan" };
@@ -125,7 +140,7 @@
       '<div class="cover">' + cover + '</div>' +
       '<div class="body"><div class="meta"><span class="chip ' + esc(p.status) + '">' + esc(STATUS[p.status] || p.status) + '</span><span class="year">' + esc(p.category) + ' · ' + esc(p.year) + '</span></div>' +
       '<h3>' + esc(p.title) + '</h3><p>' + esc(p.text) + '</p>' +
-      '<div class="tags">' + (p.tags || []).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("") + '</div>' +
+      '<div class="tags">' + tags(p.tags) + '</div>' +
       (links ? '<div class="links">' + links + '</div>' : "") + '</div></article>';
   }).join("");
 
@@ -162,8 +177,8 @@
   }).join("");
 
   /* ---------- Sosmed ---------- */
-  $("#socials").innerHTML = (D.socials || []).filter(function (s) { return s.url; }).map(function (s) {
-    return '<li><a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(s.label) + '" data-cursor-label="' + esc(s.label) + '">' + icon(s.icon) + '</a></li>';
+  $("#socials").innerHTML = (D.socials || []).filter(function (s) { return s.url; }).map(function (s, i) {
+    return '<li style="--i:' + i + '"><a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(s.label) + '" data-cursor-label="' + esc(s.label) + '">' + icon(s.icon) + '</a></li>';
   }).join("");
 
   /* ---------- Toast ---------- */
@@ -206,6 +221,8 @@
   var mq = window.matchMedia("(prefers-color-scheme: dark)");
   function isDark() { var t = doc.dataset.theme; return t ? t === "dark" : mq.matches; }
   $("#themeBtn").addEventListener("click", function () {
+    var btn = this;
+    btn.classList.remove("turn"); void btn.offsetWidth; btn.classList.add("turn");
     var next = isDark() ? "light" : "dark";
     doc.dataset.theme = next;
     try { localStorage.setItem("theme", next); } catch (e) {}
@@ -283,8 +300,21 @@
 
   /* ---------- Nav: kapsul + sembunyi saat turun ---------- */
   var nav = $("#nav"), lastY = window.scrollY, ticking = false;
+  var hero = $("#top"), bar = $("#progress span"), maxS = 1, vh = window.innerHeight;
+  // ukuran halaman dibaca saat berubah saja, bukan di handler scroll
+  function measure() {
+    vh = window.innerHeight;
+    maxS = Math.max(1, document.documentElement.scrollHeight - vh);
+  }
+  measure();
+  window.addEventListener("resize", measure);
+  window.addEventListener("load", measure);
+  if ("ResizeObserver" in window) new ResizeObserver(measure).observe(document.body);
+
   function onScroll() {
     var y = window.scrollY;
+    bar.style.transform = "scaleX(" + Math.min(1, y / maxS).toFixed(4) + ")";
+    if (!reduce && y < vh * 1.5) hero.style.setProperty("--py", Math.round(y));
     nav.classList.toggle("scrolled", y > 24);
     if (!document.body.classList.contains("menu-open")) {
       nav.classList.toggle("hidden", y > lastY && y > 300);
@@ -353,6 +383,16 @@
       label.style.transform = "translate(" + rx + "px," + ry + "px)";
       requestAnimationFrame(loop);
     })();
+
+    /* Foto hero ikut arah mouse */
+    var media = $(".hero-media"), mr = null;
+    media.addEventListener("pointerenter", function () { mr = media.getBoundingClientRect(); });
+    media.addEventListener("pointermove", function (e) {
+      if (!mr) return;
+      var x = ((e.clientX - mr.left) / mr.width - 0.5) * 26, y = ((e.clientY - mr.top) / mr.height - 0.5) * 26;
+      sealBtn.style.translate = x.toFixed(1) + "px " + y.toFixed(1) + "px";
+    });
+    media.addEventListener("pointerleave", function () { mr = null; sealBtn.style.translate = ""; });
 
     /* Magnet */
     $$("[data-magnetic]").forEach(function (el) {

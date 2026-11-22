@@ -439,11 +439,79 @@ body.menu-open .nav-in::before { opacity: 0; }
 .js .project.in, .js .skill.in, .js .timeline li.in, .js .fact.in { opacity: 1; transform: none; }
 .js .project.in:hover, .js .skill.in:hover, .js .fact.in:hover { transform: translateY(-5px); }
 
+/* ---------- Bar progres scroll ---------- */
+.progress { position: fixed; inset: 0 0 auto; height: 4px; z-index: 160; pointer-events: none; }
+.progress span { display: block; height: 100%; background: var(--blue-light); transform-origin: left; transform: scaleX(0); will-change: transform; }
+
+/* ---------- Hero: pembuka bertahap + parallax ---------- */
+.hero-glow { translate: 0 calc(var(--py, 0) * .35px); }
+.hero-media { translate: 0 calc(var(--py, 0) * -.1px); }
+.js .hero .hero-lead[data-reveal] { transition-delay: .35s; }
+.js .hero .hero-cta[data-reveal] { transition-delay: .45s; }
+.js .hero .hero-stats[data-reveal] { transition-delay: .55s; }
+.js .hero-media .seal-photo { opacity: 0; transform: scale(.55) rotate(-30deg); transition: opacity .5s var(--ease), transform 1.1s var(--spring), translate .6s var(--ease); }
+.js .hero-media.in .seal-photo { opacity: 1; transform: none; }
+.js .hero-media .bubble, .js .hero-media .float-chip { opacity: 0; scale: .4; transition: opacity .35s var(--ease), scale .6s var(--spring); }
+.js .hero-media.in .bubble, .js .hero-media.in .float-chip { opacity: 1; scale: 1; }
+.bubble { transform-origin: 10% 100%; }
+.js .hero-media.in .fc1 { transition-delay: .5s; }
+.js .hero-media.in .fc2 { transition-delay: .65s; }
+.js .hero-media.in .fc3 { transition-delay: .8s; }
+.js .hero-media.in .bubble { transition-delay: .95s; }
+
+/* ---------- Detail yang muncul setelah kartunya ---------- */
+.js .kicker[data-reveal]::before { scale: 0; transition: scale .5s var(--spring) .35s; }
+.js .kicker.in::before { scale: 1; }
+.js .skill .ikon-stiker, .js .fact .ikon-stiker { scale: 0; rotate: -25deg; transition: scale .6s var(--spring) .25s, rotate .6s var(--spring) .25s; }
+.js .skill.in .ikon-stiker, .js .fact.in .ikon-stiker { scale: 1; rotate: 0deg; }
+.skill:hover .ikon-stiker, .fact:hover .ikon-stiker { animation: wiggle .55s var(--ease); }
+@keyframes wiggle { 25% { transform: rotate(-12deg); } 50% { transform: rotate(9deg); } 75% { transform: rotate(-4deg); } }
+.js .skill .tag, .js .project .tag, .js .stack-row .tag { opacity: 0; translate: 0 10px; transition: opacity .4s var(--ease), translate .5s var(--spring); transition-delay: calc(.35s + var(--i, 0) * 60ms); }
+.js .in .tag { opacity: 1; translate: 0 0; }
+
+/* Linimasa: garis tergambar, titik meletup */
+.js .timeline li::before { transform: scaleY(0); transform-origin: top; transition: transform 1s var(--ease) .45s; }
+.js .timeline li.in::before { transform: none; }
+.js .timeline .pt { scale: 0; transition: scale .55s var(--spring) .2s; }
+.js .timeline li.in .pt { scale: 1; }
+
+/* Sosmed meletup satu-satu */
+.js .contact-actions .socials li { opacity: 0; scale: .4; transition: opacity .3s var(--ease), scale .55s var(--spring); transition-delay: calc(.3s + var(--i, 0) * 90ms); }
+.js .contact-actions.in .socials li { opacity: 1; scale: 1; }
+
+/* ---------- Hover kecil ---------- */
+.btn .ic, .to-top .ic, .project .links .ic { transition: transform .3s var(--spring); }
+.btn:hover .ic, .project .links a:hover .ic { transform: translate(3px, -3px); }
+#cvBtn:hover .ic { transform: translateY(3px); }
+#copyBtn:hover .ic { transform: rotate(-10deg) scale(1.1); }
+.to-top:hover .ic { transform: rotate(-45deg) translate(3px, -3px); }
+.icon-btn.turn .ic { animation: turn .6s var(--spring); }
+@keyframes turn { from { transform: rotate(-200deg) scale(.3); opacity: 0; } }
+
+/* ---------- Pita berjalan ---------- */
+.ribbons { position: relative; height: clamp(150px, 17vw, 230px); overflow: hidden; }
+.ribbon { position: absolute; left: -6%; width: 112%; top: 50%; border-block: var(--bw) solid var(--edge); overflow: hidden; }
+.ribbon.front { background: var(--blue); color: #fff; transform: translateY(-50%) rotate(-3deg); box-shadow: 0 var(--lift) 0 var(--edge-shadow); }
+.ribbon.back { background: var(--card); color: var(--ink-2); transform: translateY(-50%) rotate(2.5deg); }
+.track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+.ribbon.back .track { animation-duration: 46s; animation-direction: reverse; }
+.ribbons:hover .track { animation-play-state: paused; }
+.grp { display: flex; align-items: center; gap: 26px; padding: 14px 26px 14px 0; white-space: nowrap; font-family: var(--f-head); font-weight: 800; font-size: clamp(24px, 3vw, 38px); letter-spacing: -.02em; line-height: 1.1; }
+.ribbon.back .grp { padding-block: 9px; gap: 20px; padding-right: 20px; font-family: var(--f-num); font-weight: 700; font-size: clamp(13px, 1.3vw, 16px); letter-spacing: .14em; text-transform: uppercase; }
+.grp svg { width: 22px; height: 22px; flex: none; color: var(--blue-light); }
+.ribbon.back .grp svg { width: 12px; height: 12px; color: var(--blue); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (max-width: 599px) {
+  .ribbon.front { transform: translateY(-50%) rotate(-7deg); }
+  .ribbon.back { transform: translateY(-50%) rotate(6deg); }
+}
+
 /* ---------- Jeda animasi tanpa henti saat di luar layar ---------- */
 .idle, .idle * { animation-play-state: paused !important; }
 
 /* ---------- Kurangi gerakan ---------- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+  .hero-glow, .hero-media { translate: none !important; }
   .js [data-reveal], .w > span, .js .project, .js .skill, .js .timeline li, .js .fact { opacity: 1 !important; transform: none !important; }
 }
