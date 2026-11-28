@@ -130,7 +130,10 @@
   }
 
   $("#projects").innerHTML = (D.projects || []).map(function (p, i) {
-    var cover = p.image
+    var cover = p.video
+      ? '<video src="' + esc(p.video) + '"' + (p.image ? ' poster="' + esc(p.image) + '"' : "") +
+        ' width="1600" height="848" muted loop playsinline preload="none" aria-label="Rekaman tampilan ' + esc(p.title) + '"></video>'
+      : p.image
       ? '<img src="' + esc(p.image) + '" alt="Tampilan ' + esc(p.title) + '" width="1600" height="848" loading="lazy">'
       : illus(i) + '<span class="cover-note">Ilustrasi</span>';
     var links = "";
@@ -169,6 +172,19 @@
     var vis = $$(".project:not(.is-hidden)");
     vis.forEach(function (c) { c.style.gridColumn = ""; });
   });
+
+  // Video cover: putar hanya saat terlihat (hemat baterai & kuota); "kurangi gerakan" = poster saja
+  var vids = $$(".cover video");
+  if (vids.length && !reduce && "IntersectionObserver" in window) {
+    var vo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.3 });
+    vids.forEach(function (v) { v.muted = true; vo.observe(v); });
+  }
 
   /* ---------- Pengalaman ---------- */
   $("#timeline").innerHTML = (D.experience || []).map(function (x) {

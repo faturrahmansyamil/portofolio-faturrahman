@@ -15,7 +15,7 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan, **`SECURITY.md`** sebelum menamb
 | `css/style.css` | Semua komponen & layout. Tidak boleh berisi hex baru (kecuali `#fff` untuk teks di atas biru) |
 | `js/data.js` | **Satu-satunya tempat konten**: profil, angka, tentang, keahlian, proyek, pengalaman, sosmed |
 | `js/main.js` | Render data (`esc()` wajib), segel `sealPath()`, reveal, nav, menu HP, kursor, magnet, tema, salin + toast |
-| `assets/` | `foto.jpg`, `cv.pdf`, `proyek/*.webp` (1600×848) |
+| `assets/` | `foto.webp`, `cv.pdf`, `proyek/*.webp` (1600×848), `proyek/*.mp4` (cover video opsional, tanpa suara, ≤ 1 MB) |
 | `.well-known/security.txt` | Kontak keamanan (RFC 9116), perbarui `Expires` tiap tahun |
 | `.nojekyll` | Supaya GitHub Pages menyajikan folder berawalan titik |
 | `DESIGN.md`, `SECURITY.md`, `SKILL.md`, `PLANNING.md`, `CHANGELOG.md` | Dokumen repo |
