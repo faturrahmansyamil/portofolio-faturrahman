@@ -60,9 +60,12 @@ window.PORTFOLIO = {
   // status: "go" (live) | "beta" | "wip" (dikembangkan) | "plan" (direncanakan)
   // image: screenshot asli 1600x848. Kosong = ilustrasi otomatis berlabel "Ilustrasi".
   projects: [
-    { title: "Toko Online UMKM", year: "2026", category: "Web App", status: "go",
-      text: "Katalog produk dengan keranjang dan checkout via WhatsApp.", tags: ["React", "Tailwind"],
-      image: "", demo: "#", code: "#" },
+    // ASLI. Repo privat → tombol Kode disembunyikan (code kosong)
+    { title: "TMail", year: "2026", category: "Web App", status: "go",
+      text: "Email sementara gratis tanpa daftar. Inbox mengecek sendiri tiap 10 detik, email terhapus otomatis setelah 24 jam, lengkap dengan salin OTP, QR code, dan blokir gambar pelacak.",
+      tags: ["HTML", "CSS", "JavaScript", "Vercel"],
+      image: "assets/proyek/tmail.webp", demo: "https://tmail.syamxuanify.biz.id", code: "" },
+    // Di bawah ini masih CONTOH. GANTI dengan proyek asli.
     { title: "Dashboard Absensi", year: "2026", category: "Web App", status: "beta",
       text: "Dashboard admin untuk rekap absensi dengan grafik mingguan.", tags: ["JavaScript", "Chart.js"],
       image: "", demo: "#", code: "#" },

@@ -5,6 +5,7 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/id-ID/1.1.0/).
 ## [Unreleased]
 
 ### Ditambahkan
+- Proyek asli pertama: **TMail** (email sementara, live di tmail.syamxuanify.biz.id) dengan cover screenshot asli `assets/proyek/tmail.webp` (1600×848, 60 KB). Repo privat, jadi hanya tombol Demo. Menggantikan contoh "Toko Online UMKM".
 - Animasi baru: pembuka hero bertahap (segel berputar masuk, chip dan gelembung meletup), parallax hero saat scroll, foto ikut arah mouse, bar progres scroll, pita berjalan berisi teknologi (berhenti saat disentuh mouse), garis linimasa tergambar, ikon/tag/sosmed muncul bertahap, ikon kartu bergoyang saat hover, panah tombol bergeser saat hover, ikon tema berputar saat diganti.
 - `AGENTS.md` dan `CLAUDE.md`: aturan untuk AI agent, diadaptasi dari FUSIONIFY UI untuk web pribadi.
 - Animasi tanpa henti dijeda saat seksinya di luar layar (`data-pause` + `.idle`).
